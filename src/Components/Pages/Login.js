@@ -7,7 +7,7 @@ const Login = () => {
   const enteredUserId = useRef();
   const passwordRef = useRef();
 
-  async function postdata(e) {
+  async function postLoginData(e) {
     const response = await fetch("http://localhost:8000/login", {
       method: "POST",
       // mode: "cors",
@@ -17,6 +17,7 @@ const Login = () => {
       },
       // referrerPolicy: "no-referrer",
     });
+    console.log(response);
     const h = await response.json();
     console.log(h);
   }
@@ -26,9 +27,8 @@ const Login = () => {
       email: enteredUserId.current.value,
       password: passwordRef.current.value,
     };
-    console.log(data);
-    console.log(JSON.stringify(data));
-    postdata(data);
+
+    postLoginData(data);
   };
   return (
     <Card className={classes.main}>
