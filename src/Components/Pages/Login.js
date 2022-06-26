@@ -1,9 +1,10 @@
 // import React from "react";
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import classes from "./Login.module.css";
 import Card from "../UI/Card";
-const Login = () => {
+const Login = (props) => {
   const enteredUserId = useRef();
   const passwordRef = useRef();
 
@@ -17,9 +18,12 @@ const Login = () => {
       },
       // referrerPolicy: "no-referrer",
     });
-    console.log(response);
+    // console.log(response);
     const h = await response.json();
-    console.log(h);
+    if (h && h.id) {
+      props.login(true, h.id);
+    }
+    // console.log(h);
   }
   const submitHandler = (event) => {
     event.preventDefault();

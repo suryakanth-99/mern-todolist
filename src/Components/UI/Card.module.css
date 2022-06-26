@@ -1,11 +1,23 @@
-.card {
-    padding: 1rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
-    background-color:white;
-    margin :auto;
-    position: relative;
-    margin: 10em 20em;
-    position: inherit;
+/* .card {
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  background-color: white;
+  margin: auto;
+  position: relative;
+  margin: 10em 300px;
+  position: inherit;
+} */
 
+/* @media screen and (max-width: 800px) {
+  .card {
+    position: absolute;
+    margin: 10em 80px;
+  }
 }
+/* @media screen and (max-width: 0px) {
+  .card {
+    position: absolute;
+    margin: 10em 80px;
+  }
+} */

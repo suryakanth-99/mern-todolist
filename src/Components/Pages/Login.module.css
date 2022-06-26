@@ -1,32 +1,38 @@
 .heading {
-    text-align: center;
+  text-align: center;
 }
 .form {
-    display: flex;
-    flex-direction: column; 
-    justify-content:space-around;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
 }
 
-.username, .password {
-    margin : 10px 10px;
+.username,
+.password {
+  margin: 10px 10px;
 }
 
 .btn {
-    border-radius: 0.4em;
-    border-style: solid;
-    padding: 6px 15px;
-
+  border-radius: 0.4em;
+  border-style: solid;
+  padding: 6px 15px;
 }
 .btn:hover {
-    border-radius: 0.4em;
-    border-style: solid;
-    padding: 6px 15px;
-    background-color: rgba(112, 45, 207, 0.84);
+  border-radius: 0.4em;
+  border-style: solid;
+  padding: 6px 15px;
+  background-color: rgba(112, 45, 207, 0.84);
 }
 
-#username , #password{
-    box-sizing: border-box;
-    border: 1.5px solid;
-    border-radius: 4px;
+#username,
+#password {
+  box-sizing: border-box;
+  border: 1.5px solid;
+  border-radius: 4px;
 }
+/* @media screen and (max-width: 647px) {
+  .form {
+    text-align: left;
+  }
+} */

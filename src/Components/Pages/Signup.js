@@ -1,7 +1,9 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router";
 import Card from "../UI/Card";
 import classes from "./SignUp.module.css";
 const SignUp = () => {
+  const navigate = useNavigate();
   const enteredFirstName = useRef();
   const enteredLastName = useRef();
   const enteredEmail = useRef();
@@ -18,16 +20,19 @@ const SignUp = () => {
       // referrerPolicy: "no-referrer",
     });
     const h = await response.json();
+    if (h && h.id) {
+      navigate(`/login`);
+    }
     console.log(h);
   }
 
   const submitHandler = (event) => {
     event.preventDefault();
     const data = {
-      firstname: enteredFirstName,
-      lastname: enteredLastName,
-      email: enteredEmail,
-      password: enteredPassword,
+      firstname: enteredFirstName.current.value,
+      lastname: enteredLastName.current.value,
+      email: enteredEmail.current.value,
+      password: enteredPassword.current.value,
     };
     postSignupData(data);
   };
