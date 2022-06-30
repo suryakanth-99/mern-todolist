@@ -5,27 +5,39 @@ import SignUp from "./Components/Pages/Signup";
 import Welcome from "./Components/to-do/Welcome";
 import { Route, Routes } from "react-router";
 import "./App.css";
-import getUserData from "./Components/routeFunctions/getUserData";
 import ToDo from "./Components/to-do/ToDo";
-// import { Switch } from "react-router-dom";
 
 function App() {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  function loginHandler(val, id) {
-    setIsLoggedIn(val);
+  const [token, settoken] = useState();
+  const [isOnSession, setIsOnSession] = useState(false);
+  function sessionHandler(val, token) {
+    setIsOnSession(val);
+    settoken(token);
     if (val) {
-      navigate(`/user/tasks/${id}`);
+      navigate(`/user/${token}`);
     }
+  }
+  function sessionLogoutHandler() {
+    setIsOnSession(false);
+    navigate("/");
   }
 
   return (
     <>
       <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="/login" element={<Login login={loginHandler} />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/user/tasks/:id" element={<ToDo />} />
+        <Route
+          path="/"
+          element={<Welcome />}
+          onsession={isOnSession}
+          t={token}
+        />
+        <Route path="/login" element={<Login session={sessionHandler} />} />
+        <Route path="/signup" element={<SignUp session={sessionHandler} />} />
+        <Route
+          path="/user/:token"
+          element={<ToDo logout={sessionLogoutHandler} />}
+        />
       </Routes>
     </>
   );

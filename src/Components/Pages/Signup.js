@@ -1,9 +1,7 @@
 import { useRef } from "react";
-import { useNavigate } from "react-router";
 import Card from "../UI/Card";
 import classes from "./SignUp.module.css";
-const SignUp = () => {
-  const navigate = useNavigate();
+const SignUp = (props) => {
   const enteredFirstName = useRef();
   const enteredLastName = useRef();
   const enteredEmail = useRef();
@@ -12,18 +10,15 @@ const SignUp = () => {
   async function postSignupData(signupdata) {
     const response = await fetch("http://localhost:8000/signup", {
       method: "POST",
-      // mode: "cors",
       body: JSON.stringify(signupdata),
       headers: {
         "Content-Type": "application/json",
       },
-      // referrerPolicy: "no-referrer",
     });
     const h = await response.json();
-    if (h && h.id) {
-      navigate(`/login`);
+    if (h && h.token) {
+      props.session(true, h.token);
     }
-    console.log(h);
   }
 
   const submitHandler = (event) => {
