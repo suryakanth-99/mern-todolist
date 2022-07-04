@@ -28,11 +28,15 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<Welcome />}
-          onsession={isOnSession}
-          t={token}
+          element={
+            <Welcome
+              onsession={isOnSession}
+              t={token}
+              session={sessionHandler}
+            />
+          }
         />
-        <Route path="/login" element={<Login session={sessionHandler} />} />
+        {/* <Route path="/login" element={<Login session={sessionHandler} />} /> */}
         <Route path="/signup" element={<SignUp session={sessionHandler} />} />
         <Route
           path="/user/:token"

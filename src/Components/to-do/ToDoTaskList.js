@@ -1,4 +1,5 @@
 import React from "react";
+import { Flex, Box, Button } from "@chakra-ui/react";
 
 const ToDoTaskList = (props) => {
   const task = props.taskobj;
@@ -17,12 +18,16 @@ const ToDoTaskList = (props) => {
     }
   };
   return (
-    <div className={props.class}>
-      <li key={task._id}>{task.task}</li>
-      <span>
-        <button onClick={deleteUserTask.bind(null, task._id)}>-</button>
-      </span>
-    </div>
+    <Flex minWidth="max-content" alignItems="center">
+      <Box p="2">
+        <li style={{ width: "250px" }} key={task._id}>
+          {task.task}
+        </li>
+      </Box>
+      <Box p="4">
+        <Button onClick={deleteUserTask.bind(null, task._id)}>-</Button>
+      </Box>
+    </Flex>
   );
 };
 

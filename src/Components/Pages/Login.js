@@ -1,8 +1,18 @@
 // import React from "react";
+import { Center, Input, Link } from "@chakra-ui/react";
+import { Link as ReactLink } from "@reach/router";
+
+import {
+  FormControl,
+  Text,
+  FormLabel,
+  Box,
+  FormHelperText,
+  Button,
+} from "@chakra-ui/react";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
-import classes from "./Login.module.css";
-import Card from "../UI/Card";
+import { Link as RouteLink } from "react-router-dom";
+
 const Login = (props) => {
   const enteredUserId = useRef();
   const passwordRef = useRef();
@@ -27,65 +37,36 @@ const Login = (props) => {
       email: enteredUserId.current.value,
       password: passwordRef.current.value,
     };
-
+    enteredUserId.current.value = "";
+    passwordRef.current.value = "";
     postLoginData(data);
   };
   return (
     <div>
-      <div>
-        <nav className="navbar navbar-expand-lg bg-light">
-          <div className="container-fluid ">
-            <div>
-              <Link to="/" className="navbar-brand" href="#">
-                TODO
-              </Link>
-            </div>
-
-            <div className="row">
-              <div className="col-sm-12 text-center">
-                <button
-                  className="btn btn-outline-success center-block"
-                  type="submit"
-                >
-                  Logout
-                </button>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </div>
-
-      <Card className={classes.main}>
-        <h1 className={classes.heading}>Login</h1>
-        <form onSubmit={submitHandler} className={classes.form}>
-          <div className={classes.username}>
-            <label htmlFor="username">UserName</label>
-            <br />
-            <input
-              type="text"
-              name="username"
-              id={classes.username}
-              ref={enteredUserId}
-            ></input>
-          </div>
-          <div className={classes.password}>
-            <label htmlFor="password">Password</label>
-            <br />
-            <input
-              type="password"
-              name="password"
-              id={classes.password}
-              ref={passwordRef}
-            ></input>
-          </div>
-          <div>
-            <button className={classes.btn}>Login</button>
-            <p>
-              Not Subscribed? <Link to="/Signup">Subscribe Now</Link>
-            </p>
-          </div>
+      <Box maxW="sm" borderRadius="lg" overflow="hidden" h="100%" px="5" py="3">
+        <form>
+          <FormControl py="3">
+            <FormLabel htmlFor="email">Email address</FormLabel>
+            <Input id="email" type="email" ref={enteredUserId} />
+            <FormHelperText>We'll never share your email.</FormHelperText>
+          </FormControl>
+          <FormControl py="3">
+            <FormLabel htmlFor="email">Password</FormLabel>
+            <Input id="password" type="password" ref={passwordRef} />
+          </FormControl>
+          <Center>
+            <Button mb="2" colorScheme="blue" onClick={submitHandler}>
+              Login
+            </Button>
+          </Center>
+          <Text>
+            Not Registered?{" "}
+            <RouteLink to="/signup">
+              <Link>Signup now</Link>
+            </RouteLink>
+          </Text>
         </form>
-      </Card>
+      </Box>
     </div>
   );
 };

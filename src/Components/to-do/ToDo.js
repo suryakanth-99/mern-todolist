@@ -1,8 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import ToDoTaskList from "./ToDoTaskList";
-import Card from "../../Components/UI/Card";
-import classes from "./ToDo.module.css";
+import { Link as RouteLink } from "react-router-dom";
+import {
+  Flex,
+  Box,
+  Heading,
+  Spacer,
+  Button,
+  ButtonGroup,
+  Center,
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  Input,
+} from "@chakra-ui/react";
 
 const ToDo = (props) => {
   const taskRef = useRef();
@@ -18,6 +30,7 @@ const ToDo = (props) => {
         },
       });
       const data = await response.json();
+      console.log(data);
       setTasks(data);
     };
     fetchData().catch((err) => {
@@ -52,34 +65,131 @@ const ToDo = (props) => {
   const logoutHandler = () => {};
   return (
     <div>
-      <div>
-        <button onclick={logoutHandler}>Logout</button>
-      </div>
-      <Card>
-        <div className="card-header">
-          <input type="text" ref={taskRef} className={classes.todo}></input>
-          <span>
-            <button onClick={addTask.bind(null, taskRef)}>addTask</button>
-          </span>
-        </div>
-        {console.log(tasks)}
-        {tasks && (
-          <ul className="list-group">
-            {tasks.map((taskObj) => {
-              return (
-                <ToDoTaskList
-                  class="list-group-item d-flex justify-content-between align-items-start"
-                  taskobj={taskObj}
-                  key={taskObj._id}
-                  token={token}
-                  deleteTask={deleteTaskHandler}
-                />
-              );
-            })}
-          </ul>
-        )}
-      </Card>
+      <Flex
+        minWidth="max-content"
+        alignItems="center"
+        gap="2"
+        bg="grey"
+        py="2"
+        px="5"
+      >
+        <Box p="2">
+          <RouteLink to="/">
+            <Heading
+              fontSize="3xl"
+              bgGradient="linear(to-l, #7928CA, #FF0080)"
+              bgClip="text"
+            >
+              TO-DO
+            </Heading>
+          </RouteLink>
+        </Box>
+        <Spacer />
+        <ButtonGroup gap="2">
+          <RouteLink to="/signup">
+            <Button colorScheme="teal" onClick={logoutHandler}>
+              Log Out
+            </Button>
+          </RouteLink>
+        </ButtonGroup>
+      </Flex>
+      <Box
+        w="100%"
+        h="100%"
+        bgGradient={[
+          "linear(to-tr, teal.300, yellow.400)",
+          "linear(to-t, blue.200, teal.500)",
+          "linear(to-b, orange.100, purple.300)",
+        ]}
+      >
+        <Center>
+          <Box
+            maxW="sm"
+            bg="white"
+            borderRadius="lg"
+            px="5"
+            py="5"
+            mt="20"
+            mb="10"
+          >
+            <Box display="flex" maxW="sm" borderRadius="lg" px="5" py="5">
+              <Input
+                id="newtask"
+                type="text"
+                placeholder="Add task"
+                ref={taskRef}
+              />
+              {/* <Spacer /> */}
+              <Center>
+                <Button
+                  flex="2"
+                  ml="2"
+                  colorScheme="blue"
+                  onClick={addTask.bind(null, taskRef)}
+                >
+                  Add
+                </Button>
+              </Center>
+            </Box>
+
+            <Box
+              maxW="sm"
+              borderRadius="lg"
+              display="flex"
+              overflow="hidden"
+              h="100%"
+              px="5"
+              py="3"
+            >
+              {tasks && (
+                <ul>
+                  {tasks.map((taskObj) => {
+                    return (
+                      <ToDoTaskList
+                        taskobj={taskObj}
+                        key={taskObj._id}
+                        token={token}
+                        deleteTask={deleteTaskHandler}
+                      />
+                    );
+                  })}
+                </ul>
+              )}
+            </Box>
+          </Box>
+        </Center>
+      </Box>
     </div>
+
+    // <div>
+    //   <div>
+    //     <button onclick={logoutHandler}>Logout</button>
+    //   </div>
+    //   <Card>
+    //     <div className="card-header">
+    //       <input type="text" ref={taskRef} className={classes.todo}></input>
+    //       <span>
+    //         <button onClick={addTask.bind(null, taskRef)}>addTask</button>
+    //       </span>
+    //     </div>
+    //     {console.log(tasks)}
+    //     {tasks && (
+    //       <ul className="list-group">
+    //         {tasks.map((taskObj) => {
+    //           return (
+    //             <ToDoTaskList
+    //               class="list-group-item d-flex justify-content-between align-items-start"
+    //               taskobj={taskObj}
+    //               key={taskObj._id}
+    //               token={token}
+    //               deleteTask={deleteTaskHandler}
+    //             />
+    //           );
+    //         })}
+    //       </ul>
+    //     )}
+    //   </Card>
+    // </div>
   );
 };
 

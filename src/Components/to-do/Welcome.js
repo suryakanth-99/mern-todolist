@@ -1,72 +1,67 @@
 import { Link } from "react-router-dom";
-import classes from "./welcome.module.css";
+import {
+  Flex,
+  Image,
+  Box,
+  Heading,
+  Spacer,
+  Button,
+  ButtonGroup,
+  Center,
+} from "@chakra-ui/react";
+import Login from "../Pages/Login";
 const Welcome = (props) => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-light">
-        <div className="container-fluid ">
-          <div>
-            <Link to="/" className="navbar-brand" href="#">
-              TODO
-            </Link>
-          </div>
-          {props.session && (
-            <div>
-              <Link to={`/user/${props.t}`} className="navbar-brand" href="#">
-                TODO
-              </Link>
-            </div>
-          )}
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          {props.session && (
-            <div
-              className="collapse navbar-collapse grid"
-              style={{ justifyContent: "flex-end" }}
-              id="navbarSupportedContent"
+      <Flex
+        minWidth="max-content"
+        alignItems="center"
+        gap="2"
+        bg="grey"
+        py="2"
+        px="5"
+      >
+        <Box p="2">
+          <Link to="/">
+            <Heading
+              fontSize="3xl"
+              bgGradient="linear(to-l, #7928CA, #FF0080)"
+              bgClip="text"
             >
-              <div className="row">
-                <div className="col-sm-12 text-center">
-                  <Link to="/signup">
-                    <button
-                      className="btn btn-outline-success center-block"
-                      type="submit"
-                    >
-                      SignUp
-                    </button>
-                  </Link>
+              TO-DO
+            </Heading>
+          </Link>
+        </Box>
+        <Spacer />
+        <ButtonGroup gap="2">
+          <Link to="/signup">
+            <Button colorScheme="teal">Sign Up</Button>
+          </Link>
+        </ButtonGroup>
+      </Flex>
+      <Box
+        w="100%"
+        h="100%"
+        bgGradient={[
+          "linear(to-tr, teal.300, yellow.400)",
+          "linear(to-t, blue.200, teal.500)",
+          "linear(to-b, orange.100, purple.300)",
+        ]}
+      >
+        <Center>
+          <Flex borderRadius="lg" bg="white" mt="20" mb="10">
+            <Login session={props.session} />
 
-                  <Link to="/login">
-                    <button
-                      className="btn btn-outline-success center-block"
-                      type="submit"
-                    >
-                      Login
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </nav>
-      <body>
-        <p>welcome to todo</p>
-      </body>
-      <div className={classes.footerPadding}>
-        <div className={classes.footer}>
-          <p>© 2021 Copyright: Suryakanth</p>
-        </div>
-      </div>
+            <Box maxW="sm" borderRadius="lg" px="5" py="5">
+              <Image
+                objectFit={"inherit"}
+                src={process.env.PUBLIC_URL + "images/todo.webp"}
+                alt="todolist"
+              />
+            </Box>
+          </Flex>
+        </Center>
+      </Box>
     </div>
   );
 };
