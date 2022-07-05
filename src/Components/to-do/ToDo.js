@@ -10,9 +10,6 @@ import {
   Button,
   ButtonGroup,
   Center,
-  FormControl,
-  FormLabel,
-  FormHelperText,
   Input,
 } from "@chakra-ui/react";
 
@@ -160,36 +157,6 @@ const ToDo = (props) => {
         </Center>
       </Box>
     </div>
-
-    // <div>
-    //   <div>
-    //     <button onclick={logoutHandler}>Logout</button>
-    //   </div>
-    //   <Card>
-    //     <div className="card-header">
-    //       <input type="text" ref={taskRef} className={classes.todo}></input>
-    //       <span>
-    //         <button onClick={addTask.bind(null, taskRef)}>addTask</button>
-    //       </span>
-    //     </div>
-    //     {console.log(tasks)}
-    //     {tasks && (
-    //       <ul className="list-group">
-    //         {tasks.map((taskObj) => {
-    //           return (
-    //             <ToDoTaskList
-    //               class="list-group-item d-flex justify-content-between align-items-start"
-    //               taskobj={taskObj}
-    //               key={taskObj._id}
-    //               token={token}
-    //               deleteTask={deleteTaskHandler}
-    //             />
-    //           );
-    //         })}
-    //       </ul>
-    //     )}
-    //   </Card>
-    // </div>
   );
 };
 

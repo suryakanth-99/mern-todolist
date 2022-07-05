@@ -8,13 +8,25 @@ import {
   FormLabel,
   Box,
   FormHelperText,
+  FormErrorMessage,
   Button,
 } from "@chakra-ui/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link as RouteLink } from "react-router-dom";
 
 const Login = (props) => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [formIsValid, setFormIsValid] = useState(false);
+
+  const emailHandler = (e) => {
+    setEmail(e.target.value);
+  };
+  const passwordHandler = (e) => {
+    setPassword(e.target.value);
+  };
   const enteredUserId = useRef();
+  // const isError = enteredUserId.current.value === "";
   const passwordRef = useRef();
 
   async function postLoginData(e) {
@@ -47,12 +59,29 @@ const Login = (props) => {
         <form>
           <FormControl py="3">
             <FormLabel htmlFor="email">Email address</FormLabel>
-            <Input id="email" type="email" ref={enteredUserId} />
+            <Input
+              required
+              id="email"
+              type="email"
+              ref={enteredUserId}
+              onChange={emailHandler}
+              value={email}
+            />
+            {/* {isError ? ( */}
             <FormHelperText>We'll never share your email.</FormHelperText>
+            {/* ) : ( */}
+            <FormErrorMessage>Email is required.</FormErrorMessage>
+            {/* )} */}
           </FormControl>
           <FormControl py="3">
             <FormLabel htmlFor="email">Password</FormLabel>
-            <Input id="password" type="password" ref={passwordRef} />
+            <Input
+              id="password"
+              type="password"
+              ref={passwordRef}
+              onChange={passwordHandler}
+              value={password}
+            />
           </FormControl>
           <Center>
             <Button mb="2" colorScheme="blue" onClick={submitHandler}>
