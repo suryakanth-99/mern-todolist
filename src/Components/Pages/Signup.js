@@ -117,6 +117,7 @@ const SignUp = (props) => {
                 <FormControl py="3">
                   <FormLabel htmlFor="email">Password</FormLabel>
                   <Input id="password" type="password" ref={enteredPassword} />
+                  <FormHelperText>Password must have min 6 char</FormHelperText>
                 </FormControl>
                 <Center>
                   <Button mb="2" colorScheme="blue" onClick={submitHandler}>
